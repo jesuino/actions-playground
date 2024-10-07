@@ -1,0 +1,30 @@
+name: Checkout a repository
+on:
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: Target Backstage repository to have exported plugins
+        required: true
+        type: string
+        default: 'janus-idp/backstage-plugins'
+      ref:
+        description: Target Branch/Tag/SHA
+        required: false
+        type: string
+        default: 'master'
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+
+    name: Checkout
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4        
+        with:
+          repository: ${{ inputs.repo }}
+          ref: ${{ inputs.ref }}

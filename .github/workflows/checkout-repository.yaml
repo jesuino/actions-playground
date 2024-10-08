@@ -11,7 +11,7 @@ on:
         description: Target Branch/Tag/SHA
         required: false
         type: string
-        default: 'master'
+        default: 'main'
 
 concurrency:
   group: ${{ github.workflow }}
